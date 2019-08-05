@@ -693,6 +693,11 @@
             An encoded string representing a JWT.
             </summary>
         </member>
+        <member name="M:CSETWeb_Api.Controllers.CountryAndStatesController.#ctor">
+            <summary>
+            Assessment demographics.
+            </summary>
+        </member>
         <member name="M:CSETWeb_Api.Controllers.DemographicsController.#ctor">
             <summary>
             Assessment demographics.

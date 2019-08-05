@@ -4322,6 +4322,7 @@
     <Compile Include="Controllers\CommentData.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CountryAndStatesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DemographicsController.cs" />
     <Compile Include="Controllers\DiagnosticController.cs" />
@@ -4368,6 +4369,7 @@
     <Folder Include="assets\" />
     <Folder Include="Documents\htmlhelp\Capturing Scenarios\" />
     <Folder Include="Documents\htmlhelp\spell\" />
+    <Folder Include="Views\CountryAndStates\" />
     <Folder Include="Views\Dashboard\" />
     <Folder Include="Views\Guid\" />
     <Folder Include="Views\IRP2\" />

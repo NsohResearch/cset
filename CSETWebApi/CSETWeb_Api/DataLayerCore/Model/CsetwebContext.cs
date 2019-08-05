@@ -113,7 +113,6 @@ namespace DataLayerCore.Model
         public virtual DbSet<PROCUREMENT_REFERENCES> PROCUREMENT_REFERENCES { get; set; }
         public virtual DbSet<QUESTION_GROUP_HEADING> QUESTION_GROUP_HEADING { get; set; }
         public virtual DbSet<QUESTION_GROUP_TYPE> QUESTION_GROUP_TYPE { get; set; }
-        public virtual DbSet<QUESTION_SUB_QUESTION> QUESTION_SUB_QUESTION { get; set; }
         public virtual DbSet<RECENT_FILES> RECENT_FILES { get; set; }
         public virtual DbSet<RECOMMENDATIONS_REFERENCES> RECOMMENDATIONS_REFERENCES { get; set; }
         public virtual DbSet<REFERENCES_DATA> REFERENCES_DATA { get; set; }
@@ -554,7 +553,9 @@ namespace DataLayerCore.Model
 
                 entity.Property(e => e.Name).IsUnicode(false);
 
-                entity.Property(e => e.Width).HasDefaultValueSql("((60))");
+                entity.Property(e => e.Tags).IsUnicode(false);
+
+                entity.Property(e => e.WIdth).HasDefaultValueSql("((60))");
 
                 entity.HasOne(d => d.Component_Family_NameNavigation)
                     .WithMany(p => p.COMPONENT_SYMBOLS)
@@ -585,6 +586,13 @@ namespace DataLayerCore.Model
                     .HasForeignKey(d => d.Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_COMPONENT_SYMBOLS_GM_TO_CSET_COMPONENT_SYMBOLS");
+            });
+
+            modelBuilder.Entity<COUNTRIES>(entity =>
+            {
+                entity.HasIndex(e => e.ISO_code)
+                    .HasName("IX_COUNTRIES")
+                    .IsUnique();
             });
 
             modelBuilder.Entity<CSET_VERSION>(entity =>
@@ -1811,17 +1819,6 @@ namespace DataLayerCore.Model
                 entity.Property(e => e.Scoring_Type).IsUnicode(false);
             });
 
-            modelBuilder.Entity<QUESTION_SUB_QUESTION>(entity =>
-            {
-                entity.HasKey(e => new { e.Question_Id, e.Sub_Question_Id, e.Question_Group_Id })
-                    .HasName("PK_Question_Sub_Question_1");
-
-                entity.HasOne(d => d.Question_)
-                    .WithMany(p => p.QUESTION_SUB_QUESTION)
-                    .HasForeignKey(d => d.Question_Id)
-                    .HasConstraintName("FK_QUESTION_SUB_QUESTION_NEW_QUESTION");
-            });
-
             modelBuilder.Entity<RECENT_FILES>(entity =>
             {
                 entity.HasKey(e => e.RecentFileId)
@@ -2362,6 +2359,16 @@ namespace DataLayerCore.Model
                     .WithMany(p => p.STANDARD_TO_UNIVERSAL_MAP)
                     .HasForeignKey(d => d.Universal_Sal_Level)
                     .HasConstraintName("FK_STANDARD_TO_UNIVERSAL_MAP_UNIVERSAL_SAL_LEVEL");
+            });
+
+            modelBuilder.Entity<STATES_AND_PROVINCES>(entity =>
+            {
+                entity.HasOne(d => d.Country_CodeNavigation)
+                    .WithMany(p => p.STATES_AND_PROVINCES)
+                    .HasPrincipalKey(p => p.ISO_code)
+                    .HasForeignKey(d => d.Country_Code)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_STATES_AND_PROVINCES_COUNTRIES");
             });
 
             modelBuilder.Entity<SUB_CATEGORY_ANSWERS>(entity =>

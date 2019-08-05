@@ -130,7 +130,7 @@ namespace CSETWeb_Api.BusinessManagers
                             LongName = s.Long_Name,
                             ComponentFamilyName = s.Component_Family_Name,
                             Tags = s.Tags,
-                            Width = (int) s.Width,
+                            Width = (int) s.WIdth,
                             Height = (int) s.Height
                         };
 

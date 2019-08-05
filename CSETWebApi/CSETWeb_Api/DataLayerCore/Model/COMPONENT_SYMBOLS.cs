@@ -37,9 +37,9 @@ namespace DataLayerCore.Model
         [Required]
         [StringLength(100)]
         public string Display_Name { get; set; }
-        public int Width { get; set; }
+        public int WIdth { get; set; }
         public int Height { get; set; }
-        [StringLength(2048)]
+        [StringLength(250)]
         public string Tags { get; set; }
 
         [ForeignKey("Component_Family_Name")]
